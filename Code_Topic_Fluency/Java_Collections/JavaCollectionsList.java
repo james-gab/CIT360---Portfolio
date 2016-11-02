@@ -1,7 +1,4 @@
 
-
-// http://tutorials.jenkov.com/java-collections/list.html
-
 import java.util.*;
 
 /**
