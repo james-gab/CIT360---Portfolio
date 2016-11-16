@@ -91,5 +91,11 @@ public class Control {
         }
     }
     
+    static void exit(Integer user){
+        if(user == 0){
+            View.main(null);
+        }
+    }
+    
     
 }

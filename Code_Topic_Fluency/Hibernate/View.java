@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author gab
  */
 public class View {
-    
+
     Scanner userInput = new Scanner(System.in);
     
     public static void main(String[] args){
@@ -140,11 +140,11 @@ public class View {
     String aUserName = null;
     String aCreatedBy = null;
     
-    System.out.println("update user stub");
+//    System.out.println("update user stub");
     VlistUser();
     
     System.out.println("");
-    System.out.println("Please select a User to update from the list:");
+    System.out.println("Please select a User to update from the list, or 0 to return to main menu:");
     Integer user = null;
     try{
         user = Integer.parseInt(userInput.nextLine());
@@ -155,6 +155,7 @@ public class View {
         return;
     }
     
+    Control.exit(user);
     DBUser updateUser = Control.updateUser(user);
         
     System.out.println("");
