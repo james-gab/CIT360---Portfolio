@@ -118,23 +118,13 @@ public class View {
     
     public void VlistUser(){
     
-//         System.out.println("list user stub");
          System.out.println("Users currently in Database");
          System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
-//         System.out.printf("%-10s%-20s%-20s%-20s\n","*******","********","**********","************");
          System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
-//         System.out.printf("%-10s%-20s%-20s%-20s\n","_______","________","__________","____________");
-//         System.out.println();
- 
-//Control.listUser() has a problm with the return value.
-//         Iterator<User> iteratedUsers = (Iterator) Control.listUser();
+         System.out.println();
 
-// These next 2 lines should be in the Control and NOT HERE
-// placed here for testing to confirm DB connection and While loop works
-         List<DBUser> userList = Model.showAllUsers();
-         Iterator<DBUser> iteratedUsers = userList.iterator();
+         Iterator<DBUser> iteratedUsers = Control.listUser().iterator();
 
-// Sucesssssss!!!! This WHILE LOOP finally works!!!!!!!
          while(iteratedUsers.hasNext()){
              DBUser user = iteratedUsers.next();
              System.out.printf("%-10s%-20s%-20s%-20s\n", user.getUserId(),user.getUsername(),user.getCreatedBy(),user.getCreatedDate());
@@ -147,8 +137,51 @@ public class View {
    
     
     public void VupdateUser(){
+    String aUserName = null;
+    String aCreatedBy = null;
     
     System.out.println("update user stub");
+    VlistUser();
+    
+    System.out.println("");
+    System.out.println("Please select a User to update from the list:");
+    Integer user = null;
+    try{
+        user = Integer.parseInt(userInput.nextLine());
+    } catch (NumberFormatException e) {
+        System.out.println();
+        System.out.println("Invalid Entry, please try again.");
+        System.out.println();
+        return;
+    }
+    
+    DBUser updateUser = Control.updateUser(user);
+        
+    System.out.println("");
+    System.out.println("Updating User: " + updateUser.getUsername());
+    System.out.println("");
+    System.out.println("Enter the corrected Information or press enter to keep the current Information just press Enter....");
+    System.out.println("User Name:       " + updateUser.getUsername());
+    System.out.print("new User Name:   ");
+    aUserName = userInput.nextLine();
+    System.out.println("User CREATED_BY: " + updateUser.getCreatedBy());
+    System.out.print("new CREATED_BY:  ");
+    
+    aCreatedBy = userInput.nextLine();
+    
+    aUserName = Control.ckForUser(user,aUserName);
+    aCreatedBy = Control.ckForCreatedBy(user,aCreatedBy);
+    
+//    Control.creatUser(Control.ckForUser(user,aUserName),Control.ckForCreatedBy(user,aCreatedBy));
+    Control.updateTheUser(user,aUserName,aCreatedBy);
+    System.out.println();
+    
+    
+    // add the new user lised here
+    
+    System.out.println();
+    System.out.println();
+    
     }
     
  

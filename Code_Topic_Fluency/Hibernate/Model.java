@@ -22,6 +22,11 @@ public class Model {
      * DBUser Database functions
      */
     
+    
+    
+    
+    
+    
     static void insertUser(DBUser user) {
         Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -32,8 +37,9 @@ public class Model {
     static void updateUser(DBUser updateDB){
         Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-        Query userDB = (Query) session.createQuery("Select u from DBUser as u where u.id = :uId");
-        session.merge(userDB.setParameter("uId", updateDB.getUserId()));
+	Query userDB = session.createQuery("Select u from DBUser as u where u.id = :uId");
+	userDB.setParameter("uId", updateDB.getUserId());
+	session.merge(updateDB);
         transaction.commit();
     }
     

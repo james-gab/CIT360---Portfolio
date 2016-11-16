@@ -37,16 +37,29 @@ public class Control {
              Model.insertUser(person);
     }
     
-    public static void updateUser(){
-        
+    static DBUser updateUser(Integer user){
+        DBUser theUser = Model.showUserByID(user);
+        return theUser;
     }
     
-    static List<DBUser> listUser(){
+    static DBUser updateTheUser(Integer user, String name, String by){
+             DBUser person = new DBUser();
+             person.setUserId(user);
+             person.setUsername(name);
+             person.setCreatedBy(by);
+             person.setCreatedDate(new Date());
+             
+             Model.updateUser(person);
+             return person;
         
+    }
+
+
+
+
+    static List<DBUser> listUser(){
         List<DBUser> userList = Model.showAllUsers();
-        Iterator<DBUser> iteratedUsers = userList.iterator();
-//        return (List<User>) iteratedUsers;
-        return null;
+       return userList;
     }
     
     public static void deleteUser(){
@@ -56,6 +69,27 @@ public class Control {
     public static void getMainMenu(){
         DBMainMenu menu = new DBMainMenu();
     }
+    
+    static String ckForUser(Integer user, String name){
+        if(!"".equals(name)){
+            return name;
+        } else{
+            DBUser theUser = Model.showUserByID(user);
+//            DBUser theUser = updateUser(user);
+            return theUser.getUsername();
+        }
+    }
 
+    
+    static String ckForCreatedBy(Integer user, String by){
+        if(!"".equals(by)){
+            return by;
+        } else{
+            DBUser theUser = Model.showUserByID(user);
+//            DBUser theUser = updateUser(user);
+            return theUser.getCreatedBy();
+        }
+    }
+    
     
 }

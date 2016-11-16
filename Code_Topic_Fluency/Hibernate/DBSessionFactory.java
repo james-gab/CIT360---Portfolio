@@ -16,6 +16,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 
 @SuppressWarnings("depreciation")
+//@SuppressWarnings("fallthrough")
+//@SuppressWarnings("INFO")
+
 public class DBSessionFactory {
     
     private static final SessionFactory sessionFactory;
@@ -27,7 +30,6 @@ public class DBSessionFactory {
         config.setProperty("hibernate.connection.url", "jdbc:mysql://gabjames-org-mysql.gabjames.org:3306/cit360_team_e_skills_db");
         config.setProperty("hibernate.connection.username", "teameadmin");
         config.setProperty("hibernate.connection.password", "c!t360T3amE");
-        config.setProperty("hibernate.connection.pool_size", "1");
         config.setProperty("hibernate.connection.pool_size", "1");
         config.setProperty("hibernate.connection.autocommit", "true");
         config.setProperty("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");

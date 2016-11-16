@@ -17,7 +17,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "USER")
+@Table(name = "DBUSER")
 public class DBUser implements Serializable{
  
 @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
