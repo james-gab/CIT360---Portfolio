@@ -6,7 +6,6 @@
 package hibernateportfolio;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,16 +17,13 @@ import java.util.Scanner;
 
 
 public class Control {
-     Scanner userInput = new Scanner(System.in);
+
+     private Scanner userInput = new Scanner(System.in);
      
     
     public static void main(String[] args) {}
         
     static void creatUser(String aUserName, String aCreatedBy) {
-        
-//        System.out.print(aUserName);
-//        System.out.print(aCreatedBy);
-        
         
              DBUser person = new DBUser();
              person.setUsername(aUserName);
@@ -38,8 +34,12 @@ public class Control {
     }
     
     static DBUser updateUser(Integer user){
+        if("".equals(user)){
+            return null;
+        } else{
         DBUser theUser = Model.showUserByID(user);
         return theUser;
+        }
     }
     
     static DBUser updateTheUser(Integer user, String name, String by){
@@ -53,17 +53,24 @@ public class Control {
              return person;
         
     }
-
-
-
-
+    
     static List<DBUser> listUser(){
         List<DBUser> userList = Model.showAllUsers();
        return userList;
     }
     
-    public static void deleteUser(){
-        
+    static List<DBUser> listSearchedUser(String user){
+        List<DBUser> userList = Model.showUserListByUniqueSearch(user);
+       return userList;
+    }
+
+    static String deleteUser(Integer user, String YESorNO) {
+        if (YESorNO.equalsIgnoreCase("Y")){
+            Model.deletUser(Model.showUserByID(user));
+            return "User Removed!";
+        } else {
+        return "User Not Removed, Returning to Main Menu";
+        }
     }
     
     public static void getMainMenu(){
@@ -74,9 +81,12 @@ public class Control {
         if(!"".equals(name)){
             return name;
         } else{
-            DBUser theUser = Model.showUserByID(user);
+//            DBUser theUser = Model.showUserByID(user);
 //            DBUser theUser = updateUser(user);
-            return theUser.getUsername();
+//            return theUser.getUsername();
+
+// this line makes this ACP compliant
+            return theUser(user);
         }
     }
 
@@ -85,9 +95,12 @@ public class Control {
         if(!"".equals(by)){
             return by;
         } else{
-            DBUser theUser = Model.showUserByID(user);
+//            DBUser theUser = Model.showUserByID(user);
 //            DBUser theUser = updateUser(user);
-            return theUser.getCreatedBy();
+//            return theUser.getCreatedBy();
+
+// This line makes this ACP compliant
+            return theCreatedBy(user);
         }
     }
     
@@ -97,5 +110,50 @@ public class Control {
         }
     }
     
+    static String ckUser(Integer user){
+        if(user == null){
+            return "";
+        } else{
+//            DBUser theUser = Model.showUserByID(user);
+//            return theUser.getUsername();
+//This makes these ACP compliant
+            return theUser(user);
+        }
+    }
+    static String ckCreatedBy(Integer user){
+        if(user == null){
+            return "";
+        } else{
+//            DBUser theUser = Model.showUserByID(user);
+//            return theUser.getCreatedBy();
+//This makes these ACP compliant
+              return theCreatedBy(user);
+        }
+    }
+
+    
+    static String theUser(Integer user){
+            DBUser theUser = Model.showUserByID(user);
+            return theUser.getUsername();
+    }
+    
+    static String theCreatedBy(Integer user){
+            DBUser theUser = Model.showUserByID(user);
+            return theUser.getCreatedBy();
+    }
+
+    /**
+     * @return the userInput
+     */
+    public Scanner getUserInput() {
+        return userInput;
+    }
+
+    /**
+     * @param userInput the userInput to set
+     */
+    public void setUserInput(Scanner userInput) {
+        this.userInput = userInput;
+    }
     
 }
