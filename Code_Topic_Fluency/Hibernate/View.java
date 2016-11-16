@@ -170,15 +170,19 @@ public class View {
     
     aCreatedBy = userInput.nextLine();
     
-    aUserName = Control.ckForUser(user,aUserName);
-    aCreatedBy = Control.ckForCreatedBy(user,aCreatedBy);
+//    aUserName = Control.ckForUser(user,aUserName);
+//    aCreatedBy = Control.ckForCreatedBy(user,aCreatedBy);
+//    Control.updateTheUser(user,aUserName,aCreatedBy);
     
-//    Control.creatUser(Control.ckForUser(user,aUserName),Control.ckForCreatedBy(user,aCreatedBy));
-    Control.updateTheUser(user,aUserName,aCreatedBy);
+    Control.updateTheUser(user,Control.ckForUser(user,aUserName),Control.ckForCreatedBy(user,aCreatedBy));
+
     System.out.println();
-    
-    
+    updateUser = Control.updateUser(user);
     // add the new user lised here
+    System.out.println("Updated User information:");
+    System.out.println("User:       " + updateUser.getUsername());
+    System.out.println("CREATED_BY: " + updateUser.getCreatedBy());
+    
     
     System.out.println();
     System.out.println();
