@@ -6,7 +6,6 @@
 package hibernateportfolio;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -130,10 +129,11 @@ public class View {
     
     private void VlistUser(){
     
-         System.out.println("Users currently in Database");
-         System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
-         System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
-         System.out.println();
+        UsersCurrentlyInDatabase();
+//         System.out.println("Users currently in Database");
+//         System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
+//         System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
+//         System.out.println();
 
          Iterator<DBUser> iteratedUsers = Control.listUser().iterator();
 
@@ -161,11 +161,12 @@ public class View {
 
     //Control.exit(Integer.parseInt(searchedUser));
     
+    UsersCurrentlyInDatabase();
     
-         System.out.println("Users currently in Database");
-         System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
-         System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
-         System.out.println();
+//         System.out.println("Users currently in Database");
+//         System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
+//         System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
+//         System.out.println();
 
 //         Iterator<DBUser> iteratedUsers = Control.listUser().iterator();
          Iterator<DBUser> iteratedUsers = Control.listSearchedUser(searchedUser).iterator();
@@ -287,9 +288,9 @@ public class View {
     }
     
 
-// THESE ARE NOT FULLY WORKING
 
 // changing code to ACP compliance
+    // ACP Compliant Methods
     
     private String VsystemInputUserName(Integer user){
 //    DBUser updateUser = Control.updateUser(user);
@@ -308,7 +309,15 @@ public class View {
     return aCreatedBy;
     }
      
- 
-
+    
+    private void UsersCurrentlyInDatabase(){
+        System.out.println("Users currently in Database");
+        System.out.printf("%-10s%-20s%-20s%-20s\n","user_id","username","created_by","created_date");
+        System.out.printf("%-10s%-20s%-20s%-20s\n","+++++++","++++++++","++++++++++","++++++++++++");
+        System.out.println();
+    }
+    
+    
+    
     
 }

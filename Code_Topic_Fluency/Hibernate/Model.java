@@ -5,7 +5,6 @@
  */
 package hibernateportfolio;
 
-import static java.util.Collections.list;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Query;
