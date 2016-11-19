@@ -1,30 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package TestingJSON;
-
 /**
- *
  * @author gab
- * 
  * SandBox code
- * 
  */
-    
-    import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class JsonEncodeDemo {
 
    public static void main(String[] args){
       JSONObject obj = new JSONObject();
+      JSONArray list = new JSONArray();
+	list.add("msg 1");
+	list.add("msg 2");
+	list.add("msg 3");
+	list.add("msg 6");
+	list.add("msg 5");
+	list.add("msg 4");
+	list.add("msg 3");
 
       obj.put("aname", "foo");
-      obj.put("num", new Integer(100));
-      obj.put("balance", new Double(1000.21));
-      obj.put("is_vip", new Boolean(true));
+      obj.put("num", 100);
+      obj.put("balance", 1000.21);
+      obj.put("is_vip", true);
 
+//The output for each JSON variable is on one line 
+//regardless of which screen output command is used
+      System.out.println(obj);
+      System.out.println(list);
       System.out.print(obj);
+      System.out.print(list);
    }
 }
