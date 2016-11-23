@@ -16,8 +16,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 
 @SuppressWarnings("depreciation")
-//@SuppressWarnings("fallthrough")
-//@SuppressWarnings("INFO")
 
 public class DBSessionFactory {
     
@@ -37,7 +35,8 @@ public class DBSessionFactory {
         config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
         config.setProperty("hibernate.current_session_context_class", "thread");
         
-        config.addAnnotatedClass(DBUser.class);
+        config.addAnnotatedClass(DB_user.class);
+        config.addAnnotatedClass(DB_user_table.class);
         
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();

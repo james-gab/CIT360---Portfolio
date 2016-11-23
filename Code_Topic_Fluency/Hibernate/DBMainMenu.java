@@ -11,7 +11,6 @@ package hibernateportfolio;
  */
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
 
