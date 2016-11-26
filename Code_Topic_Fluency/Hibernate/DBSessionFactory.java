@@ -32,11 +32,15 @@ public class DBSessionFactory {
         config.setProperty("hibernate.connection.autocommit", "true");
         config.setProperty("hibernate.cache.provider_class", "org.hibernate.cache.NoCacheProvider");
         config.setProperty("hibernate.show_sql", "false");
+//        config.setProperty("hibernate.show_sql", "true");
         config.setProperty("hibernate.transaction.factory_class", "org.hibernate.transaction.JDBCTransactionFactory");
         config.setProperty("hibernate.current_session_context_class", "thread");
         
         config.addAnnotatedClass(DB_user.class);
         config.addAnnotatedClass(DB_user_table.class);
+        config.addAnnotatedClass(DB_member_table.class);
+        config.addAnnotatedClass(DB_address_table.class);
+        config.addAnnotatedClass(DB_skills_table.class);
         
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder().applySettings(config.getProperties());
         ServiceRegistry serviceRegistry = serviceRegistryBuilder.build();
@@ -49,7 +53,6 @@ public class DBSessionFactory {
     }
     
     private DBSessionFactory(){   
-        
     }
     
 }

@@ -111,4 +111,39 @@ public class Model {
     
     
 // END of FILE
+
+    static List<DB_member_table> showAllDBMemberTable() {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("Select u from DB_member_table as u");
+        @SuppressWarnings("unchecked")
+        List<DB_member_table> userList = userDB.list();
+        transaction.commit();
+        return userList;
+    }
+
+    static List<DB_member_table> showMemberTableListByUniqueSearch(String user) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("from DB_member_table as u where u.FName like :searchName or u.LName like :searchName");
+        userDB.setParameter("searchName", "%"+user+"%");
+        @SuppressWarnings("unchecked")
+        List<DB_member_table> userList = userDB.list();
+        transaction.commit();
+        return userList;
+    }
+
+    static List<DB_member_table> showAllActiveDBMemberTable() {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+//        Query userDB = (Query) session.createQuery("from DB_member_table as m join DB_user_table as u where u.memberID=m.memberID and u.isActive = :searchActive");
+//        Query userDB = (Query) session.createQuery("from DB_member_table as m join DB_user_table as u where u.memberMapping=m.addressTableMapping and u.isActive = :searchActive");
+//        Query userDB = (Query) session.createQuery("Select m from DB_member_table as m inner join DB_user_table as u where u.memberMapping=m.memberID and u.isActive = :searchActive");
+        Query userDB = (Query) session.createQuery("Select m from DB_member_table as m inner join m.memberUser as u where u.isActive = :searchActive");
+        userDB.setParameter("searchActive", 0);
+        @SuppressWarnings("unchecked")
+        List<DB_member_table> userList = userDB.list();
+        transaction.commit();
+        return userList;
+    }
 }

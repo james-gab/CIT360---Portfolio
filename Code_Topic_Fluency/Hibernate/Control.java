@@ -18,10 +18,101 @@ import java.util.Scanner;
 
 public class Control {
 
+    static void creatUserRecord(String aUserName, String aPassword, String aIsAdmin, 
+            String aFirstName, String aMiddelName, String aLastName, String aPhone, 
+            Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, 
+            String aState, String aZipCode) {
+// Skills Resource Assistant ~ method        
+System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.");
 
+        DB_user_table user = new DB_user_table();
+        DB_member_table member = new DB_member_table();
+        DB_address_table address = new DB_address_table();
+        
+        aPhone = aPhone.replaceAll("[-+.^:,_]","");
+        
+        user.setUserName(aUserName);
+        user.setPassword(aPassword);
+        if (aIsAdmin.equalsIgnoreCase("Y")){
+            user.setAdminUser(1);
+        } else {
+            user.setAdminUser(0);
+        }
+        member.setLName(aLastName);
+        member.setFName(aFirstName);
+        member.setMName(aMiddelName);
+        if (aPhone != null){
+            aPhone = aPhone.replaceAll("[-+.^:,_*]","");
+            member.setPhone(Integer.parseInt(aPhone));
+        } else {
+            member.setPhone(Integer.parseInt("2345678901"));
+        }
+        member.setPhoneType(aPhoneType);
+        member.setEmail(aEmail);
+        address.setCity(aCity);
+        address.setHomeState(aState);
+        address.setStreetAddress(aStreetAddress);
+        address.setZipCode(aZipCode);
+        
+        
+        
+
+
+
+//             Model.insertUser(person);
+    }
+
+    
+    
+    static List<DB_member_table> listMemberTable() {
+// Skills Resource Assistant ~ method        
+         List<DB_member_table> userList = Model.showAllDBMemberTable();
+         return userList;
+    }
+
+    static List<DB_member_table> listSearchedMemberTable(String user) {
+// Skills Resource Assistant ~ method        
+         List<DB_member_table> userList = Model.showMemberTableListByUniqueSearch(user);
+         return userList;
+    }
+
+    static boolean ckIsActive(DB_user_table theUser) {
+// Skills Resource Assistant ~ method        
+        if (theUser != null){
+        Integer active = theUser.getIsActive();
+        
+        if (active == 1){
+            return true;
+        }} else {
+            return false;
+        }
+         return false;
+        
+        
+    }
+
+// check to see is member is active and an administator
+    static boolean ckIfActive(boolean admin, boolean memberActive) {
+// Skills Resource Assistant ~ method        
+        if(memberActive == true && admin == true){
+                return true;
+            } else {
+                return false;
+            }
+    }
+
+    static List<DB_member_table> listIsActiveMemberTable() {
+// Skills Resource Assistant ~ method        
+         List<DB_member_table> userList = Model.showAllActiveDBMemberTable();
+         return userList;
+    }
 
 
      private Scanner userInput = new Scanner(System.in);
+
+
+
+
      
     
 //    public static void main(String[] args) {}
@@ -31,6 +122,7 @@ public class Control {
      
 
     static DB_user_table userLogin(String username, String password) {
+// Skills Resource Assistant ~ method        
         DB_user_table user = Model.showUserByUniqueSearch(username, password);
         if (user != null){
             return user;
@@ -39,13 +131,18 @@ public class Control {
     }
 
     static boolean ckAdmin(DB_user_table theUser) {
+// Skills Resource Assistant ~ method        
+        if (theUser != null){
         Integer admin = theUser.getAdminUser();
         
         if (admin == 1){
             return true;
-        } else {
+        }} else {
             return false;
         }
+         return false;
+        
+        
     }
 
 
