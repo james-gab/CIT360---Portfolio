@@ -55,9 +55,9 @@ public class View {
 //            password = VPassword(user);
 
 // remove after testing
-//            String fakeUserName = "gab4";
+            String fakeUserName = "gab4";
 // Remove after testing            
-            String fakeUserName = "matt5";
+//            String fakeUserName = "matt5";
 // Remove after testing            
             username = fakeUserName;
 // Remove after testing            
@@ -98,9 +98,9 @@ public class View {
             // and remove unneeded System.out.println()'s
             
             System.out.println(" 1 - Add User");
-            System.out.println(" 2 - List All User's");
-            System.out.println(" 3 - List User by name search");
-            System.out.println(" 4 - List inactive users");
+            System.out.println(" 2 - List All User's          - FINISHED");
+            System.out.println(" 3 - List User by name search - FINSIHED");
+            System.out.println(" 4 - List inactive users      - FINISHED");
             System.out.println(" 5 - Update User");
             System.out.println(" 6 - Remove User");
             System.out.println(" 7 - Search Skills List");
@@ -307,7 +307,7 @@ public class View {
 
     private String VCity(Integer user){
 // Skills Resource Assistant ~ method        
-         System.out.print("City\n::::  ");
+         System.out.print("City\n::::  "+"");
          return userInput.nextLine();
     }
 
@@ -345,21 +345,50 @@ public class View {
         System.out.println("To create a new record" );
         System.out.println("Please Enter the following~");
 
-        String aUserName = VUserName(user);
-        String aPassword = VPassword(user);
-        String aIsAdmin = VIsAdmin(user);
-        String aFirstName = VFirstName(user);
-        String aMiddelName = VMiddleName(user);
-        String aLastName = VLastName(user);
+//        String aUserName = VUserName(user);
+//        String aPassword = VPassword(user);
+//        String aIsAdmin = VIsAdmin(user);
+//        String aFirstName = VFirstName(user);
+//        String aMiddelName = VMiddleName(user);
+//        String aLastName = VLastName(user);
         String aPhone = VPhone(user);
-        Integer aPhoneType = null;
-        while (aPhoneType == null){aPhoneType = VPhoneType(user);}
-        String aEmail = VEmail(user);
-        String aStreetAddress = VStreetAddress(user);
-        String aCity = VCity(user);
-        String aState = VState(user);
-        String aZipCode = VZipCode(user);
+//        Integer aPhoneType = null;
+//        while (aPhoneType == null){aPhoneType = VPhoneType(user);}
+//        String aEmail = VEmail(user);
+//        String aStreetAddress = VStreetAddress(user);
+//        String aCity = VCity(user);
+//        String aState = VState(user);
+//        String aZipCode = VZipCode(user);
         
+//        String aUserName = "newUser";
+//        String aPassword = "password";
+//        String aIsAdmin = "y";
+//        String aFirstName = "NewDude";
+//        String aMiddelName = "is";
+//        String aLastName = "Here";
+//        String aPhone = "214-568-7519";
+//        Integer aPhoneType = 2;
+//        String aEmail = "dude@dude.com";
+//        String aStreetAddress = "321654 the steet";
+//        String aCity = "DudesTown";
+//        String aState = "TX";
+//        String aZipCode = "98732";
+        
+        String aUserName = "srjbg";
+        String aPassword = "password";
+        String aIsAdmin = "n";
+        String aFirstName = "sjfb";
+        String aMiddelName = "B";
+        String aLastName = "Doe";
+//        String aPhone = "214-568-7519";
+        Integer aPhoneType = 2;
+        String aEmail = "dudes@dude.com";
+        String aStreetAddress = "321654 a steet";
+        String aCity = "DudersTown";
+        String aState = "TX";
+        String aZipCode = "98732";
+
+
         Control.creatUserRecord(aUserName,aPassword,aIsAdmin,aFirstName, aMiddelName,aLastName,aPhone, aPhoneType,aEmail, aStreetAddress,aCity, aState, aZipCode);
         System.out.println();
     }

@@ -136,9 +136,6 @@ public class Model {
     static List<DB_member_table> showAllActiveDBMemberTable() {
         Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-//        Query userDB = (Query) session.createQuery("from DB_member_table as m join DB_user_table as u where u.memberID=m.memberID and u.isActive = :searchActive");
-//        Query userDB = (Query) session.createQuery("from DB_member_table as m join DB_user_table as u where u.memberMapping=m.addressTableMapping and u.isActive = :searchActive");
-//        Query userDB = (Query) session.createQuery("Select m from DB_member_table as m inner join DB_user_table as u where u.memberMapping=m.memberID and u.isActive = :searchActive");
         Query userDB = (Query) session.createQuery("Select m from DB_member_table as m inner join m.memberUser as u where u.isActive = :searchActive");
         userDB.setParameter("searchActive", 0);
         @SuppressWarnings("unchecked")
@@ -146,4 +143,44 @@ public class Model {
         transaction.commit();
         return userList;
     }
+
+    static void insertUser(DB_user_table user, DB_member_table member, DB_address_table address, Integer id) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+// address
+//        session.saveOrUpdate(address);
+        session.save(address);
+//        transaction.commit();        
+//        session = DBSessionFactory.getSessionFactory().getCurrentSession();
+//        transaction = session.beginTransaction();
+
+//member
+//        session.saveOrUpdate(member);
+        session.save(member);
+
+//        transaction.commit();        
+//        session = DBSessionFactory.getSessionFactory().getCurrentSession();
+//        transaction = session.beginTransaction();
+
+//user
+//        session.saveOrUpdate(user);
+        session.save(user);
+
+        transaction.commit();        
+
+
+    }
+    
+    static List<DB_address_table> newMemberNumber(){
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query memberDB = (Query) session.createQuery("Select u.addressID from DB_address_table AS u where u.addressID = (select max(t.addressID) from DB_address_table AS t)");
+        @SuppressWarnings("unchecked")
+        List<DB_address_table> memberList = memberDB.list();
+        transaction.commit();
+        return memberList;
+    }
+    
+    
 }

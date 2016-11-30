@@ -22,6 +22,9 @@ import javax.persistence.*;
 public class DB_user_table implements Serializable{
     
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "userID")
+     private int userID;
+    
     @Column(name = "username")
      private String userName;
     
@@ -43,11 +46,12 @@ public class DB_user_table implements Serializable{
     
 
 
-    public DB_user_table(String username, String password, Integer adminuser, DB_member_table id, Integer isActive){
+    public DB_user_table(Integer userID, String username, String password, Integer adminuser, DB_member_table id, Integer isActive){
+        this.userID = userID;
         this.userName = username;
         this.password = password;
         this.adminUser = adminuser;        
-        this.memberMapping = id;
+//        this.memberMapping = id;
         this.isActive = isActive;
     }
 
@@ -97,5 +101,19 @@ public class DB_user_table implements Serializable{
      */
     public void setMemberMapping(DB_member_table memberMapping) {
         this.memberMapping = memberMapping;
+    }
+
+    /**
+     * @return the userID
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * @param userID the userID to set
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

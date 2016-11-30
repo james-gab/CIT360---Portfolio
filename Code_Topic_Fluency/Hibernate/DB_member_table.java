@@ -31,7 +31,7 @@ public class DB_member_table implements Serializable {
      private String MName;
     
     @Column(name = "phone")
-     private Integer phone;
+     private Long phone;
     
     @Column(name = "phoneType")
      private Integer phoneType;
@@ -55,7 +55,7 @@ public class DB_member_table implements Serializable {
     public DB_member_table(){
     }
 
-    public DB_member_table(Integer memberID, String LName, String FName, String MName, Integer phone, Integer phoneType, String Email, DB_address_table addressTableID, String skillsID, Integer wardID){
+    public DB_member_table(Integer memberID, String LName, String FName, String MName, Long phone, Integer phoneType, String Email, DB_address_table addressTableID, String skillsID, Integer wardID){
         this.memberID = memberID;
         this.LName = LName;
         this.FName = FName;        
@@ -129,14 +129,14 @@ public class DB_member_table implements Serializable {
     /**
      * @return the phone
      */
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

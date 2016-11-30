@@ -28,8 +28,9 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         DB_user_table user = new DB_user_table();
         DB_member_table member = new DB_member_table();
         DB_address_table address = new DB_address_table();
+        int newMemberID = newMemNumber();
         
-        aPhone = aPhone.replaceAll("[-+.^:,_]","");
+//        aPhone = aPhone.replaceAll("[-+.^:,_]","");
         
         user.setUserName(aUserName);
         user.setPassword(aPassword);
@@ -38,28 +39,48 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         } else {
             user.setAdminUser(0);
         }
+        user.setIsActive(1);
+        
+        member.setMemberID(newMemberID);
         member.setLName(aLastName);
         member.setFName(aFirstName);
         member.setMName(aMiddelName);
         if (aPhone != null){
-            aPhone = aPhone.replaceAll("[-+.^:,_*]","");
-            member.setPhone(Integer.parseInt(aPhone));
+           aPhone = aPhone.replaceAll("[-+.^:,_*]","");
+//            member.setPhone(Integer.parseInt(aPhone));
+            member.setPhone(Long.parseLong(aPhone));
         } else {
-            member.setPhone(Integer.parseInt("2345678901"));
+            member.setPhone(Long.parseLong(aPhone));
         }
         member.setPhoneType(aPhoneType);
         member.setEmail(aEmail);
+        member.setSkillsID("");
+        member.setWardID(0);
+        user.setMemberMapping(member);
+//        address.setAddressID(newMemberID);
+        address.setStreetAddress(aStreetAddress);
         address.setCity(aCity);
         address.setHomeState(aState);
-        address.setStreetAddress(aStreetAddress);
         address.setZipCode(aZipCode);
+        member.setAddressTableMapping(address);
         
+        System.out.println("user name - " + user.getUserName());
+        System.out.println("user password - " + user.getPassword());
+        System.out.println("user isadmin - " + user.getAdminUser());
+        System.out.println("member ID - " + member.getMemberID());
         
-        
-
-
-
-//             Model.insertUser(person);
+        Model.insertUser(user,member,address,newMemberID);
+             
+             
+    }
+    
+    static Integer newMemNumber (){
+// Skills Resource Assistant ~ method
+// this works
+        List<DB_address_table> query = Model.newMemberNumber();
+        int result = Integer.parseInt(query.toString().replace("[", "").replace("]",""))+1;
+//        System.out.println("results - "+result);
+        return result;
     }
 
     
