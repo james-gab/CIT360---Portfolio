@@ -181,6 +181,86 @@ public class Model {
         transaction.commit();
         return memberList;
     }
+
+    static DB_member_table showMemberByID(Integer user) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("Select m from DB_member_table as m where m.id = :mId");
+        userDB.setParameter("mId", user);
+        DB_member_table theUser = (DB_member_table) userDB.uniqueResult();
+        transaction.commit();
+        return theUser;
+    }
+
+    static DB_address_table AddressByMemberNumber(DB_address_table theMember) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("Select a from DB_address_table as a where a.addressID = :aId");
+        userDB.setParameter("aId", theMember.getAddressID());
+        DB_address_table theAddress = (DB_address_table) userDB.uniqueResult();
+        transaction.commit();
+        return theAddress;
+    }
+
+    static DB_user_table userByMemberNumber(DB_member_table theMember) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        Query userDB = (Query) session.createQuery("Select m from DB_user_table as m where m.memberMapping = :mId");
+        userDB.setParameter("mId", theMember);
+        DB_user_table theUser = (DB_user_table) userDB.uniqueResult();
+        transaction.commit();
+        return theUser;
+    }
+
+
+    static void updateTheUser(DB_user_table theUser) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+	Query userDB = session.createQuery("Select u from DB_user_table as u where u.id = :uId");
+	userDB.setParameter("uId", theUser.getUserID() );
+        session.merge(theUser);
+        transaction.commit();
+    }
+
+    static void updateTheMember(DB_member_table theMember) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+	Query memberDB = session.createQuery("Select m from DB_member_table as m where m.id = :mId");
+	memberDB.setParameter("mId", theMember.getMemberID());
+	session.merge(theMember);
+        transaction.commit();
+    }
+
+    static void updateTheAddress(DB_address_table theAddress) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+	Query addressDB = session.createQuery("Select a from DB_address_table as a where a.id = :aId");
+	addressDB.setParameter("aId", theAddress.getAddressID());
+	session.merge(theAddress);
+        transaction.commit();
+    }
+
+    static void deletMembersRecord(DB_member_table aMember) {
+        Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+//Address
+        Query addressDB = (Query) session.createQuery("DELETE from DB_address_table AS a where a = :aId");
+        addressDB.setParameter("aId", aMember.getAddressTableMapping());
+//user
+        Query userDB = (Query) session.createQuery("DELETE from DB_user_table as m where m = :uId");
+        userDB.setParameter("uId", aMember.getMemberUser());
+//member
+        Query memberDB = (Query) session.createQuery("DELETE from DB_member_table where memberID = :mId");
+        memberDB.setParameter("mId", aMember.getMemberID());
+
+        userDB.executeUpdate();
+        memberDB.executeUpdate();
+        addressDB.executeUpdate();
+        
+        
+        transaction.commit();
+    }
+
     
     
 }

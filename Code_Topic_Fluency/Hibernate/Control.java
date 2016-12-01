@@ -30,7 +30,7 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         DB_address_table address = new DB_address_table();
         int newMemberID = newMemNumber();
         
-//        aPhone = aPhone.replaceAll("[-+.^:,_]","");
+        aPhone = aPhone.replaceAll("[-+.^:,_]","");
         
         user.setUserName(aUserName);
         user.setPassword(aPassword);
@@ -41,7 +41,7 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         }
         user.setIsActive(1);
         
-        member.setMemberID(newMemberID);
+//        member.setMemberID(newMemberID);
         member.setLName(aLastName);
         member.setFName(aFirstName);
         member.setMName(aMiddelName);
@@ -50,6 +50,7 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
 //            member.setPhone(Integer.parseInt(aPhone));
             member.setPhone(Long.parseLong(aPhone));
         } else {
+           aPhone = aPhone.replaceAll("[-+.^:,_*]","");
             member.setPhone(Long.parseLong(aPhone));
         }
         member.setPhoneType(aPhoneType);
@@ -128,8 +129,349 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
          return userList;
     }
 
+    static DB_member_table findMember(Integer user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             DB_member_table theUser = Model.showMemberByID(user);
+             return theUser;
+         }
+    }
+
+    static DB_user_table findUser(DB_member_table theMember) {
+// Skills Resource Assistant ~ method        
+        DB_user_table user = Model.userByMemberNumber(theMember);
+        return user;
+    }
+
+    static DB_address_table findAddress(DB_member_table theMember) {
+// Skills Resource Assistant ~ method        
+        DB_address_table address;
+        address = Model.AddressByMemberNumber(theMember.getAddressTableMapping());
+        return address;
+    }
+
+    static String ckForUserName(DB_user_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getUserName() + "  -  update to: ";
+         }
+    }
+
+    static String ckForPassword(DB_user_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getPassword() + "  -  update to: ";
+         }
+    }
+
+    static String ckForAdmin(DB_user_table user) {
+// Skills Resource Assistant ~ method        
+         switch (user.getAdminUser()){
+             case 0:
+                 return "  NO  -  update to: ";
+             case 1:
+                 return "  YES  -  update to: ";
+             default:
+                 return null;
+             
+             
+         }
+    }
+
+    static String ckForFirstName(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getFName() + "  -  update to: ";
+         }
+    }
+
+    static String ckForMiddleName(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getMName() + "  -  update to: ";
+         }
+    }
+
+    static String ckForLastName(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getLName() + "  -  update to: ";
+         }
+    }
+
+    static String ckForPhone(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getPhone() + "  -  update to: ";
+         }
+    }
+
+    static String ckForPhoneType(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         switch (user.getPhoneType()){
+             case 1:
+                 return "\n Home Phone - update to: ";
+             case 2:
+                 return "\n Cell Phone - update to: ";
+             case 3:
+                 return "\n Business Phone - update to: ";
+             default:
+                 return null;
+                 
+             
+         }
+         
+    }
+
+    static String ckForEmail(DB_member_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getEmail() + "\nupdate to: ";
+         }
+    }
+
+    static String ckForStreetAdress(DB_address_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getStreetAddress() + "  -  update to: ";
+         }
+    }
+
+    static String ckForCity(DB_address_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getCity() + "  -  update to: ";
+         }
+    }
+
+    static String ckForState(DB_address_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getHomeState() + "  -  update to: ";
+         }
+    }
+
+    static String ckForZipCode(DB_address_table user) {
+// Skills Resource Assistant ~ method        
+         if("".equals(user)){
+             return null;
+         } else{
+             return user.getZipCode() + "  -  update to: ";
+         }
+    }
+
+    static Integer updateMemberRecord(String aUserName, String aPassword, String aIsAdmin, String aFirstName, String aMiddelName, String aLastName, String aPhone, Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, String aState, String aZipCode, DB_user_table theOldUser, DB_member_table theOldMember, DB_address_table theOldAddress) {
+//        DB_user_table theUser = new DB_user_table();
+//        DB_member_table theMember = new DB_member_table();
+//        DB_address_table theAddress = new DB_address_table();
+        DB_user_table theUser = theOldUser;
+        DB_member_table theMember = theOldMember;
+        DB_address_table theAddress = theOldAddress;
+        
+         
+        
+        
+//         theUser.setUserID(theOldUser.getUserID());
+//         theMember.setMemberID(theOldMember.getMemberID());
+//         theAddress.setAddressID(theOldAddress.getAddressID());
+         if (!aUserName.isEmpty()){
+             theUser.setUserName(aUserName);
+         }
+         if (!aPassword.isEmpty()){
+             theUser.setPassword(aPassword);
+         }
+         if (!aIsAdmin.isEmpty()){
+             if (aIsAdmin.equalsIgnoreCase("Y")){
+                 theUser.setAdminUser(1);
+             } else {
+                 theUser.setAdminUser(0);
+             }
+         }
+         if(!aFirstName.isEmpty()){
+             theMember.setFName(aFirstName);
+         }
+         if (!aMiddelName.isEmpty()){
+             theMember.setMName(aMiddelName);
+         }
+         if(!aLastName.isEmpty()){
+             theMember.setLName(aLastName);
+         }
+// SETPHONE needs to be fixed
+         if(!aPhone.isEmpty()){
+            aPhone = aPhone.replaceAll("[-+.^:,_*]","");
+            theMember.setPhone(Long.parseLong(aPhone));
+         }  
+         if(aPhoneType>0){
+             theMember.setPhoneType(aPhoneType);
+         }
+         if(!aEmail.isEmpty()){
+             theMember.setEmail(aEmail);
+         }
+         if(!aStreetAddress.isEmpty()){
+             theAddress.setStreetAddress(aStreetAddress);
+         }
+         if(!aCity.isEmpty()){
+             theAddress.setCity(aCity);
+         }
+         if(!aState.isEmpty()){
+             theAddress.setHomeState(aState);
+         }
+         if(!aZipCode.isEmpty()){
+             theAddress.setZipCode(aZipCode);
+         }
+         
+         
+         
+// Used for Testing         
+//         System.out.println("Updated User information: \n in Control.java (will be removed)");
+//         System.out.println("User:          " + theUser.getUserName());
+//         System.out.println("password:      " + theUser.getPassword());
+//         System.out.println("Name:          " + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName());
+//         System.out.println("Phone:         " + theMember.getPhone());
+//         System.out.println("Phone Type:    " + theMember.getPhoneType());
+//         System.out.println("E-Mail:        " + theMember.getEmail());
+//         System.out.println("Stree Address: " + theAddress.getStreetAddress());
+//         System.out.println("City:          " + theAddress.getCity());
+//         System.out.println("State:         " + theAddress.getHomeState());
+//         System.out.println("Zip Code:      " + theAddress.getZipCode());
+         
+         System.out.println();
+         System.out.println();
+
+         
+         
+         Model.updateTheUser(theUser);
+         Model.updateTheMember(theMember);
+         Model.updateTheAddress(theAddress);
+         
+         return theMember.getMemberID();
+
+
+
+
+    }
+
+    static String printTheFullMemberDetails(DB_member_table theUpdatedMember, DB_user_table theUpdatedUser, DB_address_table theUpdatedAddress) {
+         return "\nUpdated User information:\n" +
+                 "\nUser:           " + theUpdatedUser.getUserName() + 
+                 "\npassword:       " + theUpdatedUser.getPassword() + 
+                 "\nName:           " + theUpdatedMember.getFName() + " " + theUpdatedMember.getMName() + " " + theUpdatedMember.getLName()+
+                 "\nPhone:          " + theUpdatedMember.getPhone()+
+                 "\nPhone Type:     " + theUpdatedMember.getPhoneType()+
+                 "\nE-Mail:         " + theUpdatedMember.getEmail() + 
+                 "\nStreet Address: " + theUpdatedAddress.getStreetAddress() + 
+                 "\nCity:           " + theUpdatedAddress.getCity() + 
+                 "\nState:          " + theUpdatedAddress.getHomeState() + 
+                 "\nZip Code:       " + theUpdatedAddress.getZipCode() + 
+                 "\n\n\n";
+    }
+
+    static String deleteMemberRecords(Integer user, String YESorNO) {
+         if (YESorNO.equalsIgnoreCase("Y")){
+             DB_member_table aMember = Model.showMemberByID(user);
+             
+         System.out.println("memberID:      " + aMember.getMemberID());
+         System.out.println("Name:          " + aMember.getFName() + " " + aMember.getMName() + " " + aMember.getLName());
+         System.out.println("Phone:         " + aMember.getPhone());
+         System.out.println("Phone Type:    " + aMember.getPhoneType());
+         System.out.println("E-Mail:        " + aMember.getEmail());
+         System.out.println("AddressMapping:         " + aMember.getAddressTableMapping());
+             
+             Model.deletMembersRecord(aMember);
+             return "User Removed!";
+         } else {
+             return "User Not Removed, Returning to Main Menu";
+         }
+    }
+
+
+
+
 
      private Scanner userInput = new Scanner(System.in);
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
 
 
@@ -290,6 +632,9 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
          List<DB_user_table> userList = Model.showAllDBUsers();
          return userList;
     }
+    
+    
+    
 
 
 
