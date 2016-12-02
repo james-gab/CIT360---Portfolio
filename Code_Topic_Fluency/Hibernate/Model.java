@@ -83,15 +83,11 @@ public class Model {
     
      
 
-// NOT working below this line  -  YET
-// http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
 
     static DB_user_table showUserByUniqueSearch(String user, String password){
         Session session = DBSessionFactory.getSessionFactory().getCurrentSession();
         Transaction transaction = session.beginTransaction();
-//        Query userDB = (Query) session.createQuery("Select u from DB_user_table as u where u.userName = :username");
         Query userDB = (Query) session.createQuery("Select u from DB_user_table as u where u.userName = :username and u.password = :password");
-//        Query userDB = (Query) session.createQuery("from DB_user_table as u where u.username = :username" );
         userDB.setParameter("username", user);
         userDB.setParameter("password", password);
         DB_user_table theUser = (DB_user_table) userDB.uniqueResult();
@@ -149,27 +145,15 @@ public class Model {
         Transaction transaction = session.beginTransaction();
 
 // address
-//        session.saveOrUpdate(address);
         session.save(address);
-//        transaction.commit();        
-//        session = DBSessionFactory.getSessionFactory().getCurrentSession();
-//        transaction = session.beginTransaction();
 
 //member
-//        session.saveOrUpdate(member);
         session.save(member);
 
-//        transaction.commit();        
-//        session = DBSessionFactory.getSessionFactory().getCurrentSession();
-//        transaction = session.beginTransaction();
-
 //user
-//        session.saveOrUpdate(user);
         session.save(user);
 
         transaction.commit();        
-
-
     }
     
     static List<DB_address_table> newMemberNumber(){
@@ -261,6 +245,8 @@ public class Model {
         transaction.commit();
     }
 
+// NOT working below this line  -  YET
+// http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
     
     
 }

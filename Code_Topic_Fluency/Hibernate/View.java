@@ -19,12 +19,12 @@ public class View {
     
     public static void main(String[] args){
         View view = new View();
-        boolean stopUsing = false;
+        boolean logOut = false;
         
-        while (!stopUsing){
-//            stopUsing = view.mainMenu();
-            stopUsing = view.userLogin();
-//            stopUsing = view.DBTESTlistUser();
+        while (!logOut){
+//            logOut = view.mainMenu();
+            logOut = view.userLogin();
+//            logOut = view.DBTESTlistUser();
         }
         
         System.exit(0);
@@ -33,9 +33,9 @@ public class View {
     
     
     private boolean userLogin(){
-        boolean stopUsing = false;
+        boolean logOut = false;
         
-        while (!stopUsing){
+        while (!logOut){
             String username = null;
             String password = null;
             Integer user = null;
@@ -61,26 +61,26 @@ public class View {
             
             isAdmin = Control.ckIfActive(isAdmin, isMemberActive);
             
-            while (isAdmin && !stopUsing){
-                stopUsing = Administrator();
+            while (isAdmin && !logOut){
+                logOut = AdministratorMenu();
 // remove after program is working
-//                stopUsing = adminMainMenu();
+//                logOut = adminMainMenu();
             }
             
-            while (!isAdmin && !stopUsing){
-                stopUsing = endUser();
+            while (!isAdmin && !logOut){
+                logOut = endUser();
 // remove after program is working
-//              stopUsing = userMainMenu();
+//              logOut = userMainMenu();
             }
-             stopUsing = true;
+             logOut = true;
         }
-        return stopUsing;
+        return logOut;
     }
     
-    private boolean Administrator(){
-        boolean stopUsing = false;
+    private boolean AdministratorMenu(){
+        boolean logOut = false;
         
-        while (!stopUsing){
+        while (!logOut){
             Integer choice = null;
             
             System.out.println("\nAdministrator Main Menu");
@@ -137,11 +137,11 @@ public class View {
                     break;
                     
                 case 7:
-                    VaddToSkillList();
+                    VaddSkillToUser();
                     break;
                 
                 case 8:
-                    stopUsing = true;
+                    logOut = true;
                     break;
                 
                 default:
@@ -150,14 +150,14 @@ public class View {
             }
         }
         
-        return stopUsing;
+        return logOut;
     
     }
 
     private boolean endUser(){
-        boolean stopUsing = false;
+        boolean logOut = false;
         
-        while (!stopUsing){
+        while (!logOut){
             Integer choice = null;
             
             System.out.println();
@@ -197,7 +197,7 @@ public class View {
                     break;
                 
                 case 3:
-                    stopUsing = true;
+                    logOut = true;
                     break;
                 
                 default:
@@ -206,7 +206,7 @@ public class View {
             }
         }
         
-        return stopUsing;
+        return logOut;
     
     }
 
@@ -462,12 +462,9 @@ public class View {
          
          Control.exit(user);
 
-//Working to this point - rest of code needs updating
-
          DB_member_table theMember = Control.findMember(user);
          DB_user_table theUser = Control.findUser(theMember);
          DB_address_table theAddress = Control.findAddress(theMember);
-         
          
          System.out.println("\nUpdating: " + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName() + 
                  "\nEnter the corrected Information or press enter to keep the current Information just press Enter....");
@@ -494,17 +491,6 @@ public class View {
 // added the new user lised here
          
          System.out.println(Control.printTheFullMemberDetails(theUpdatedMember, theUpdatedUser, theUpdatedAddress));
-//         System.out.println("Updated User information:");
-//         System.out.println("User:          " + theUpdatedUser.getUserName());
-//         System.out.println("password:      " + theUpdatedUser.getPassword());
-//         System.out.println("Name:          " + theUpdatedMember.getFName() + " " + theUpdatedMember.getMName() + " " + theUpdatedMember.getLName());
-//         System.out.println("Phone:         " + theUpdatedMember.getPhone());
-//         System.out.println("Phone Type:    " + theUpdatedMember.getPhoneType());
-//         System.out.println("E-Mail:        " + theUpdatedMember.getEmail());
-//         System.out.println("Street Address: " + theUpdatedAddress.getStreetAddress());
-//         System.out.println("City:          " + theUpdatedAddress.getCity());
-//         System.out.println("State:         " + theUpdatedAddress.getHomeState());
-//         System.out.println("Zip Code:      " + theUpdatedAddress.getZipCode());
          
          System.out.println();
          System.out.println();
@@ -519,13 +505,14 @@ public class View {
 //        INSERT INTO `DB_user_table` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
 //        INSERT INTO `DB_user_table` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
 
-
+// Sends to different method that will be depreciated later
         VRemoveMemberRecord();
     }
     
     
     private void VRemoveMemberRecord(){
 // Skills Resource Assistant ~ method        
+// METHOD COMPLETE
          System.out.println("Member delete user stub, \nthis will not be part of the normal program\n");
          
          VListAllUser();
@@ -551,16 +538,18 @@ public class View {
     
     }
 
-
-
-
-
-
-
-    private void VSearchSkillList() {
+    private void VaddSkillToUser() {
 // Skills Resource Assistant ~ method        
-        System.out.println("VSearchSkillList() - STUB Not supported yet.");
+        System.out.println("VaddSkillToUser() - STUB Not supported yet.");
+        System.out.println("This STUB Will utilize JSON");
     }
+
+
+
+
+
+
+
 
     /**
      *
@@ -627,9 +616,9 @@ public class View {
      * 
      */
     public boolean adminMainMenu(){
-        boolean stopUsing = false;
+        boolean logOut = false;
         
-        while (!stopUsing){
+        while (!logOut){
             Integer choice = null;
             
             System.out.println();
@@ -679,7 +668,7 @@ public class View {
                     break;
                     
                 case 6:
-                    stopUsing = true;
+                    logOut = true;
                     break;
                 
                 default:
@@ -692,7 +681,7 @@ public class View {
             
         }
         
-        return stopUsing;
+        return logOut;
         
     }
     
@@ -859,9 +848,9 @@ public class View {
     }
 
     private boolean userMainMenu() {
-        boolean stopUsing = false;
+        boolean logOut = false;
         
-        while (!stopUsing){
+        while (!logOut){
             Integer choice = null;
             
             System.out.println();
@@ -896,7 +885,7 @@ public class View {
                     break;
                 
                 case 3:
-                    stopUsing = true;
+                    logOut = true;
                     break;
                 
                 default:
@@ -909,7 +898,7 @@ public class View {
             
         }
         
-        return stopUsing;
+        return logOut;
         
     }
 

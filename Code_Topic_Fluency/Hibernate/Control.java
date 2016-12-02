@@ -23,7 +23,6 @@ public class Control {
             Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, 
             String aState, String aZipCode) {
 // Skills Resource Assistant ~ method        
-System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.");
 
         DB_user_table user = new DB_user_table();
         DB_member_table member = new DB_member_table();
@@ -41,13 +40,11 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         }
         user.setIsActive(1);
         
-//        member.setMemberID(newMemberID);
         member.setLName(aLastName);
         member.setFName(aFirstName);
         member.setMName(aMiddelName);
         if (aPhone != null){
            aPhone = aPhone.replaceAll("[-+.^:,_*]","");
-//            member.setPhone(Integer.parseInt(aPhone));
             member.setPhone(Long.parseLong(aPhone));
         } else {
            aPhone = aPhone.replaceAll("[-+.^:,_*]","");
@@ -58,17 +55,11 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
         member.setSkillsID("");
         member.setWardID(0);
         user.setMemberMapping(member);
-//        address.setAddressID(newMemberID);
         address.setStreetAddress(aStreetAddress);
         address.setCity(aCity);
         address.setHomeState(aState);
         address.setZipCode(aZipCode);
         member.setAddressTableMapping(address);
-        
-        System.out.println("user name - " + user.getUserName());
-        System.out.println("user password - " + user.getPassword());
-        System.out.println("user isadmin - " + user.getAdminUser());
-        System.out.println("member ID - " + member.getMemberID());
         
         Model.insertUser(user,member,address,newMemberID);
              
@@ -283,19 +274,10 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
     }
 
     static Integer updateMemberRecord(String aUserName, String aPassword, String aIsAdmin, String aFirstName, String aMiddelName, String aLastName, String aPhone, Integer aPhoneType, String aEmail, String aStreetAddress, String aCity, String aState, String aZipCode, DB_user_table theOldUser, DB_member_table theOldMember, DB_address_table theOldAddress) {
-//        DB_user_table theUser = new DB_user_table();
-//        DB_member_table theMember = new DB_member_table();
-//        DB_address_table theAddress = new DB_address_table();
         DB_user_table theUser = theOldUser;
         DB_member_table theMember = theOldMember;
         DB_address_table theAddress = theOldAddress;
         
-         
-        
-        
-//         theUser.setUserID(theOldUser.getUserID());
-//         theMember.setMemberID(theOldMember.getMemberID());
-//         theAddress.setAddressID(theOldAddress.getAddressID());
          if (!aUserName.isEmpty()){
              theUser.setUserName(aUserName);
          }
@@ -318,7 +300,6 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
          if(!aLastName.isEmpty()){
              theMember.setLName(aLastName);
          }
-// SETPHONE needs to be fixed
          if(!aPhone.isEmpty()){
             aPhone = aPhone.replaceAll("[-+.^:,_*]","");
             theMember.setPhone(Long.parseLong(aPhone));
@@ -341,26 +322,6 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
          if(!aZipCode.isEmpty()){
              theAddress.setZipCode(aZipCode);
          }
-         
-         
-         
-// Used for Testing         
-//         System.out.println("Updated User information: \n in Control.java (will be removed)");
-//         System.out.println("User:          " + theUser.getUserName());
-//         System.out.println("password:      " + theUser.getPassword());
-//         System.out.println("Name:          " + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName());
-//         System.out.println("Phone:         " + theMember.getPhone());
-//         System.out.println("Phone Type:    " + theMember.getPhoneType());
-//         System.out.println("E-Mail:        " + theMember.getEmail());
-//         System.out.println("Stree Address: " + theAddress.getStreetAddress());
-//         System.out.println("City:          " + theAddress.getCity());
-//         System.out.println("State:         " + theAddress.getHomeState());
-//         System.out.println("Zip Code:      " + theAddress.getZipCode());
-         
-         System.out.println();
-         System.out.println();
-
-         
          
          Model.updateTheUser(theUser);
          Model.updateTheMember(theMember);
@@ -391,14 +352,6 @@ System.out.println("VListAllUser()~creatUserRecord() - STUB Not supported yet.")
     static String deleteMemberRecords(Integer user, String YESorNO) {
          if (YESorNO.equalsIgnoreCase("Y")){
              DB_member_table aMember = Model.showMemberByID(user);
-             
-         System.out.println("memberID:      " + aMember.getMemberID());
-         System.out.println("Name:          " + aMember.getFName() + " " + aMember.getMName() + " " + aMember.getLName());
-         System.out.println("Phone:         " + aMember.getPhone());
-         System.out.println("Phone Type:    " + aMember.getPhoneType());
-         System.out.println("E-Mail:        " + aMember.getEmail());
-         System.out.println("AddressMapping:         " + aMember.getAddressTableMapping());
-             
              Model.deletMembersRecord(aMember);
              return "User Removed!";
          } else {
