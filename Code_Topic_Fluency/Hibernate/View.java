@@ -177,14 +177,6 @@ public class View {
             while (choice == null){
             choice = getANumber();
             }
-//            try{
-//                choice = Integer.parseInt(userInput.nextLine());
-//            } catch (NumberFormatException e) {
-//                System.out.println();
-//                System.out.println("Invalid Entry, please try again.");
-//                System.out.println();
-//                return false;
-//            }
             
             switch (choice){
                 
@@ -336,6 +328,7 @@ public class View {
 
     private void VCreateRecord() {
 // Skills Resource Assistant ~ method    
+// METHOD working - See STUB statment for more info
         System.out.println("VCreateRecord() - STUB Needs final touches.");
         System.out.println("Add check for user name in DB before accepting.");
         System.out.println("Add check that phone num is 10 digits");
@@ -360,34 +353,6 @@ public class View {
          String aCity = VCity(theAddress);
          String aState = VState(theAddress);
          String aZipCode = VZipCode(theAddress);
-        
-//        String aUserName = "newUser";
-//        String aPassword = "password";
-//        String aIsAdmin = "y";
-//        String aFirstName = "NewDude";
-//        String aMiddelName = "is";
-//        String aLastName = "Here";
-//        String aPhone = "214-568-7519";
-//        Integer aPhoneType = 2;
-//        String aEmail = "dude@dude.com";
-//        String aStreetAddress = "321654 the steet";
-//        String aCity = "DudesTown";
-//        String aState = "TX";
-//        String aZipCode = "98732";
-        
-//        String aUserName = "srjbguyo";
-//        String aPassword = "password";
-//        String aIsAdmin = "n";
-//        String aFirstName = "sjfb";
-//        String aMiddelName = "B";
-//        String aLastName = "Doe";
-//        String aPhone = "214-568-7519";
-//        Integer aPhoneType = 2;
-//        String aEmail = "dudes@dude.com";
-//        String aStreetAddress = "321654 a steet";
-//        String aCity = "DudersTown";
-//        String aState = "TX";
-//        String aZipCode = "98732";
 
         Control.creatUserRecord(aUserName,aPassword,aIsAdmin,aFirstName, aMiddelName,aLastName,aPhone, aPhoneType,aEmail, aStreetAddress,aCity, aState, aZipCode);
     }
@@ -407,7 +372,6 @@ public class View {
     private void VListUserByName() {
 // Skills Resource Assistant ~ method        
 // METHOD working - needs an escape path
-//        System.out.println("VListUserByName() - STUB Not supported yet.");
          System.out.println("\nPlease enter the name of a user to search for, \nor Enter to return to main menu:");
          String searchedUser = null;
          try{
@@ -447,8 +411,6 @@ public class View {
 // Skills Resource Assistant ~ method
 // FUTURE UPDATE - Call a new menu to list all user or search by user name
 
-//        System.out.println("VEditRecord() - STUB Not supported yet.");
-         
          VListAllUser();
          
          System.out.println("\nPlease select a User to update from the list, or 0 to return to main menu:\n");
@@ -488,21 +450,13 @@ public class View {
          DB_user_table theUpdatedUser = Control.findUser(theMember);
          DB_address_table theUpdatedAddress = Control.findAddress(theMember);
          
-// added the new user lised here
+         System.out.println(Control.printTheFullMemberDetails(theUpdatedMember, theUpdatedUser, theUpdatedAddress) + "\n\n");
          
-         System.out.println(Control.printTheFullMemberDetails(theUpdatedMember, theUpdatedUser, theUpdatedAddress));
-         
-         System.out.println();
-         System.out.println();
-         
-        
     }
 
     private void VHideRecord() {
 // Skills Resource Assistant ~ method        
         System.out.println("VHideRecord() - STUB Not supported yet.");
-//        INSERT INTO `DB_user_table` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
-//        INSERT INTO `DB_user_table` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
 //        INSERT INTO `DB_user_table` (`userID`, `username`, `password`, `adminuser`, `isActive`, `memberID`) VALUES ('1008', 'rierubeirb', 'eriubeirb', '0', '0', '1008');
 
 // Sends to different method that will be depreciated later
