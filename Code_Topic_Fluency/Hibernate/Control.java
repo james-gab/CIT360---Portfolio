@@ -8,6 +8,7 @@ package hibernateportfolio;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import org.json.simple.JSONArray;
 
 
 /**
@@ -359,12 +360,39 @@ public class Control {
          }
     }
 
+    static void addJSONArrayToDB(DB_member_table theMember, JSONArray userSkillList) {
+        
+        theMember.setSkillsID(userSkillList.toString());
+        
+        Model.updateTheMember(theMember);
+        
+        
+    }
+
+
+    static JSONArray makeJSONArrayForMember(DB_member_table theMember) {
+//        String newString = theMember.getSkillsID().replaceAll("[\"]", "").replace("[", "").replace("]", "");
+//        String[] temp = newString.split(",");
+//        System.out.println("This is theMember.getSkillsID() in Control " + newString );
+        JSONArray theList = new JSONArray();
+        String[] temp = theMember.getSkillsID().replaceAll("[\"]", "").replace("[", "").replace("]", "").split(",");
+        for(int i=0; i<temp.length; i++){
+        theList.add(temp[i]);            
+        }
+        return theList;
+    }
+
+//    static void ckForEndOfUserInput(String x) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    
+
 
 
 
 
      private Scanner userInput = new Scanner(System.in);
-     
      
      
      

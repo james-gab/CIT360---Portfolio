@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -247,6 +248,12 @@ public class Model {
 
 // NOT working below this line  -  YET
 // http://javabeat.net/how-to-use-named-parameters-and-named-query-in-hibernate/
+
+    static DB_member_table showMemberSkillList(Integer user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     
     
 }

@@ -5,8 +5,14 @@
  */
 package hibernateportfolio;
 
+import antlr.StringUtils;
+import antlr.collections.List;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -38,7 +44,7 @@ public class View {
         while (!logOut){
             String username = null;
             String password = null;
-            Integer user = null;
+            DB_user_table user = new DB_user_table();
             
             System.out.println("\nFor testing\nAdministrator Menu access:\nU: gab4   P: gab4\nUser Menu access:\nU: matt5  P: matt5");
             System.out.println("\n\nWelcom to Skills Resource Assistant\nPlease enter: ");
@@ -95,7 +101,8 @@ public class View {
             System.out.println(" 5 - Update Member            - FINISHED");
             System.out.println(" 6 - Remove Member            - FINISHED");
             System.out.println(" 7 - Add to Member Skills List");
-            System.out.println(" 8 - QUIT");
+            System.out.println(" 8 - List Member Skills List");
+            System.out.println(" 9 - QUIT");
             System.out.println("\nPlease make a Selection");
             
             while (choice == null){
@@ -141,6 +148,10 @@ public class View {
                     break;
                 
                 case 8:
+                    VlistSkillsofUser();
+                    break;
+                
+                case 9:
                     logOut = true;
                     break;
                 
@@ -494,14 +505,89 @@ public class View {
 
     private void VaddSkillToUser() {
 // Skills Resource Assistant ~ method        
-        System.out.println("VaddSkillToUser() - STUB Not supported yet.");
-        System.out.println("This STUB Will utilize JSON");
+        
+         VListAllUser();
+         
+         System.out.println("\nPlease select a User to update from the list, or 0 to return to main menu:\n");
+         Integer user = null;
+         try{
+             user = Integer.parseInt(userInput.nextLine());
+         } catch (NumberFormatException e) {
+             System.out.println("\n\nInvalid Entry, please try again.");
+             return;
+         }
+         
+         Control.exit(user);
+
+         DB_member_table theMember = Control.findMember(user);
+         
+         System.out.println("\nUpdating: " + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName() + 
+                 "\nEnter a Skill followed by <ENTER> for each Skill"+
+                         "\nWhen done Press Enter to save the Skill list.");
+         
+         JSONArray userSkillList = VuserSkillList();
+         
+         Control.addJSONArrayToDB(theMember,userSkillList);
+         
+    }
+     
+    private JSONArray VuserSkillList() {
+// Skills Resource Assistant ~ method        
+        JSONArray userInputSkillList = new JSONArray();
+        
+        String x = null;
+        
+        do{
+            x=userInput.nextLine();
+            
+//            Control.ckForEndOfUserInput(x);
+            
+            if(x==null || "".equals(x)){
+                break;
+            } else {
+                userInputSkillList.add(x);
+            }
+            
+            
+        }while(true);
+        return userInputSkillList;
     }
 
 
 
 
 
+    private void VlistSkillsofUser() {
+// Skills Resource Assistant ~ method        
+         VListAllUser();
+         
+         System.out.println("\nPlease select a User to update from the list, or 0 to return to main menu:\n");
+         Integer user = null;
+         try{
+             user = Integer.parseInt(userInput.nextLine());
+         } catch (NumberFormatException e) {
+             System.out.println("\n\nInvalid Entry, please try again.");
+             return;
+         }
+         
+         Control.exit(user);
+
+         DB_member_table theMember = Control.findMember(user);
+         
+         JSONArray MemberSkillList = new JSONArray();
+         MemberSkillList = Control.makeJSONArrayForMember(theMember);
+         
+         
+         System.out.println("\nSkills List For: \n" + theMember.getFName() + " " + theMember.getMName() + " " + theMember.getLName() + "\n\n");
+        
+        System.out.println(MemberSkillList);
+        
+        
+        
+        
+        
+        
+    }
 
 
 
@@ -513,6 +599,11 @@ public class View {
 
 
 
+
+    
+    
+    
+    
     private void VSearchCategoryAndName() {
 // Skills Resource Assistant ~ method        
         System.out.println("VSearchCategoryAndName() - STUB Not supported yet.");
@@ -855,6 +946,7 @@ public class View {
         return logOut;
         
     }
+
 
 
 
